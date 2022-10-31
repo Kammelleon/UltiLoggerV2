@@ -10,6 +10,6 @@ class MailSenderBase:
     @email.setter
     def email(self, address):
         # TODO: Email regex
-        print(f"Setting email address to: {address}")
+        print(f"Setting gmail address to: {address}")
         self._email = address
 

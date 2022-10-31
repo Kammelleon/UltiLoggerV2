@@ -16,9 +16,5 @@ class LogsBase(ABC):
         """"""
 
     @abstractmethod
-    def open_log_file(self):
-        """"""
-
-    @abstractmethod
     def _add_datetime(self):
         """"""
