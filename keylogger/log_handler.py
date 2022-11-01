@@ -9,13 +9,14 @@ import uuid
 
 
 class LogHandler(LogsBase):
-    def __init__(self):
-        self.log_file = ""
+    def __init__(self, log_file="logs.txt"):
+        self.log_file = log_file
         self.open_mode = "a+"
+        self.file = None
 
     def __enter__(self):
         self.file = open(self.log_file, self.open_mode)
-        return self.file
+        return self
 
     def __exit__(self):
         self.file.close()
