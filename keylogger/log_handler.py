@@ -1,6 +1,3 @@
-"""
-Tutorial context managers: https://www.geeksforgeeks.org/context-manager-in-python/
-"""
 import datetime
 import platform
 from requests import get
@@ -10,24 +7,25 @@ import socket
 import re
 import uuid
 
+
 class LogHandler(LogsBase):
     def __init__(self):
-        self.logs_file = ""
+        self.log_file = ""
         self.open_mode = "a+"
 
     def __enter__(self):
-        self.file = open(self.logs_file, self.open_mode)
+        self.file = open(self.log_file, self.open_mode)
         return self.file
 
     def __exit__(self):
         self.file.close()
 
     def add_header(self):
-        with open(self.logs_file, self.open_mode) as log_file:
+        with open(self.log_file, self.open_mode) as log_file:
             log_file.write(self._create_header())
 
     def add_datetime(self):
-        with open(self.logs_file, self.open_mode) as log_file:
+        with open(self.log_file, self.open_mode) as log_file:
             log_file.write(f"\n--{self._get_current_date()}--\n")
 
     def _create_header(self):
