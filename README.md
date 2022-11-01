@@ -5,7 +5,7 @@ The previous version is deprecated as it uses the feature called by Google "less
 
 # How it works
 1. Capture key presses into .txt file located on victim machine
-2. Capture screen recording to .avi file in the same time as logs
+2. Capture screen recording to .avi file at the same time as logs
 3. Send email to receiver with logs (.txt) and corresponding screen recording film (.avi)
 
 Program works in infinite loop controlled by timeouts for some actions
