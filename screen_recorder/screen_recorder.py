@@ -18,12 +18,12 @@ class ScreenRecorder:
         Thread(target=self._start).start()
 
     def _start(self):
-        out = cv2.VideoWriter(self.out_video, self.video_codec, 20.0, (self.video_width, self.video_height))
+        video_writer = cv2.VideoWriter(self.out_video, self.video_codec, 20.0, (self.video_width, self.video_height))
 
         for _ in range(self.length * self._fps):
             screenshoot_array = array(screenshot())
             frame = cv2.cvtColor(screenshoot_array, cv2.COLOR_BGR2RGB)
-            out.write(frame)
+            video_writer.write(frame)
 
-        out.release()
+        video_writer.release()
         cv2.destroyAllWindows()
