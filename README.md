@@ -1,14 +1,22 @@
 # UltiLoggerV2
 
-This is second version of previous UltiLogger repo: https://github.com/Kammelleon/UltiLogger
+This is second version of previous UltiLogger repo: https://github.com/Kammelleon/UltiLogger.
+The previous version is deprecated as it uses the feature called by Google "less secure apps".
+
+# How it works
+1. Capture key presses into .txt file located on victim machine
+2. Capture screen recording to .avi file in the same time as logs
+3. Send email to receiver with logs (.txt) and corresponding screen recording film (.avi)
+
+Program works in infinite loop controlled by timeouts for some actions
 
 # Preparation
 
 This app was tested only on Windows 10.
 In order to use this you should have a Gmail account and 2FA enabled on it.
-Next, you need to generate app password (as Google disabled less secure apps).
+Next, you will need to generate an app password (as Google disabled less secure apps).
 You can do it here: https://myaccount.google.com/apppasswords After that you can provide
-your app password inside main.py:
+the app password inside main.py:
 
 ```python
 gmail = Gmail(app_password=YOUR_APP_PASSWORD,...
@@ -21,7 +29,7 @@ Now you are ready to the next step
 
 # Usage
 
-After preparation stage you can now set some settings according to your requirements
+After preparation stage you can now set some settings according to your requirements,
 such as time to send email, time to log datetime inside log file etc.
 In order to do this you can set the following variables:
 - log_file_location - defines the location where logs will be saved
