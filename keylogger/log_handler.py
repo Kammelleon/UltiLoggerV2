@@ -1,13 +1,16 @@
 import datetime
-import platform
-from requests import get
-from .interfaces import LogsBase
 import getpass
-import socket
+import platform
 import re
-import uuid
+import socket
 import time
+import uuid
 from threading import Thread
+
+from requests import get
+
+from .interfaces import LogsBase
+
 
 class LogHandler(LogsBase):
     def __init__(self, log_file_location="logs.txt", datetime_log_timeout=30):

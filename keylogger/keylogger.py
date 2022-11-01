@@ -1,7 +1,10 @@
 import os
-from .interfaces import KeyloggerBase
-from pynput.keyboard import Listener
 from threading import Thread
+
+from pynput.keyboard import Listener
+
+from .interfaces import KeyloggerBase
+
 
 class Keylogger(KeyloggerBase):
     def __init__(self, log_handler):
