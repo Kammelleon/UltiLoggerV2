@@ -9,9 +9,8 @@ import getpass
 import socket
 import re
 import uuid
-import os
 
-class LogsHandler(LogsBase):
+class LogHandler(LogsBase):
     def __init__(self):
         self.logs_file = ""
         self.open_mode = "a+"
@@ -27,8 +26,9 @@ class LogsHandler(LogsBase):
         with open(self.logs_file, self.open_mode) as log_file:
             log_file.write(self._create_header())
 
-    def _add_datetime(self):
-        pass
+    def add_datetime(self):
+        with open(self.logs_file, self.open_mode) as log_file:
+            log_file.write(f"\n--{self._get_current_date()}--\n")
 
     def _create_header(self):
         current_date = self._get_current_date()
