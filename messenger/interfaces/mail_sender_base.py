@@ -1,15 +1,14 @@
-class MailSenderBase:
-    def __init__(self):
-        self._email = ""
+from abc import ABC, abstractmethod
 
-    @property
-    def email(self):
-        print("Email has been set")
-        return self._email
 
-    @email.setter
-    def email(self, address):
-        # TODO: Email regex
-        print(f"Setting gmail address to: {address}")
-        self._email = address
+class MessengerBase(ABC):
+    @abstractmethod
+    def send_logs(self, file):
+        pass
+
+    @abstractmethod
+    def send_recording(self, file):
+        pass
+
+
 

