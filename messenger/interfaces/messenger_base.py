@@ -9,6 +9,3 @@ class MessengerBase(ABC):
     @abstractmethod
     def send_recording(self, file):
         pass
-
-
-
